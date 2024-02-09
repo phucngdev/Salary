@@ -1,30 +1,40 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import { Link } from "react-router-dom";
+import { Tabs } from "antd";
+import SalaryTable from "./SalaryTable";
 
+const onChange = (key) => {
+  console.log(key);
+};
+const items = [
+  {
+    key: "1",
+    label: "Bảng chấm công",
+    children: <SalaryTable></SalaryTable>,
+  },
+  {
+    key: "2",
+    label: "Tab 2",
+    children: "Content of Tab Pane 2",
+  },
+  {
+    key: "3",
+    label: "Tab 3",
+    children: "Content of Tab Pane 3",
+  },
+];
 const Header = () => {
   return (
     <>
       <Helmet>
         <title>Salary</title>
       </Helmet>
-      <div className="max-w-[80%] h-[56px] mx-auto my-3 flex items-center justify-between">
-        <h1 className="text-3xl font-bold">Salary</h1>
-        <div className="h-full flex items-center gap-4">
-          <Link
-            className="px-3 py-1 hover:border-b hover:border-b-black"
-            to="/"
-          >
-            Bảng lương
-          </Link>
-          <Link
-            className="px-3 py-1 hover:border-b hover:border-b-black"
-            to="/"
-          >
-            Ghi chú
-          </Link>
-        </div>
-      </div>
+      <Tabs
+        className="max-w-[80%] h-[56px] mx-auto my-3"
+        defaultActiveKey="1"
+        items={items}
+        onChange={onChange}
+      />
     </>
   );
 };

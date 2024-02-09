@@ -9,15 +9,9 @@ const SalaryTable = () => {
   };
   return (
     <>
-      <div className="w-[80%] mx-auto">
-        <Carousel afterChange={onChange} className="bg-slate-700">
-          <div>
-            <AddNew></AddNew>
-          </div>
-          <div>
-            <Table></Table>
-          </div>
-        </Carousel>
+      <div>
+        <AddNew></AddNew>
+        <Table></Table>
       </div>
     </>
   );

@@ -17,7 +17,12 @@ const Table = () => {
     return `${hour}:${mil}:${secon}`;
   };
 
-  const totalTimeSpace = () => {};
+  const totalTimeSpace = (timeStart, timeEnd, timeDay) => {
+    const startDate = new Date(`${timeDay} ${timeStart}`);
+    const endDate = new Date(`${timeDay} ${timeEnd}`);
+    const timeSpace = Math.abs(endDate - startDate) / 1000;
+    return timeSpace;
+  };
   return (
     <>
       <div>
