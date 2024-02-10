@@ -30,7 +30,7 @@ const Header = () => {
         <title>Salary</title>
       </Helmet>
       <Tabs
-        className="max-w-[80%] h-[56px] mx-auto my-3"
+        className="max-w-[90%] lg:max-w-[80%] h-[56px] mx-auto my-3"
         defaultActiveKey="1"
         items={items}
         onChange={onChange}

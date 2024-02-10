@@ -4,9 +4,6 @@ import Table from "./Table";
 import AddNew from "./AddNew";
 
 const SalaryTable = () => {
-  const onChange = (currentSlide) => {
-    console.log(currentSlide);
-  };
   return (
     <>
       <div>
