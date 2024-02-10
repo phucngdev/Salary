@@ -29,7 +29,7 @@ const Header = () => {
         <title>Salary</title>
       </Helmet>
       <Tabs
-        className="max-w-[90%] lg:max-w-[80%] h-[56px] mx-auto my-3"
+        className="w-[90%] lg:w-[80%] h-[56px] mx-auto my-3"
         defaultActiveKey="1"
         items={items}
       />
