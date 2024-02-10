@@ -134,6 +134,7 @@ const FirTable = () => {
       okType: "danger",
       cancelText: "No",
       onOk() {
+        setTime((prevTime) => prevTime.filter((item) => item.id !== id));
         const itemDelete = time.filter((item) => item.id !== id);
         localStorage.setItem(`firMonth`, JSON.stringify(itemDelete));
         message.success("Xoá thành công");
@@ -344,6 +345,9 @@ const FirTable = () => {
           <Button onClick={showDeleteConfirm} type="dashed">
             Delete
           </Button>
+        </div>
+        <div className="flex justify-center mt-5">
+          <h3>The copyright is owned by phucngdev</h3>
         </div>
       </div>
     </>
