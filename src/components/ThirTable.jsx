@@ -232,6 +232,7 @@ const ThirTable = () => {
             open={isModalOpen}
             onOk={handleOk}
             onCancel={handleCancel}
+            okType="danger"
           >
             <div className="flex flex-col">
               <div className="flex flex-col gap-2 mb-3">
@@ -294,6 +295,7 @@ const ThirTable = () => {
             open={modalEdit}
             onOk={handleSubmit}
             onCancel={handleCancelEdit}
+            okType="danger"
           >
             <div className="flex flex-col">
               <div className="flex flex-col gap-2 mb-3">
