@@ -119,6 +119,7 @@ const ThirTable = () => {
           content: "Xoá thành công",
           icon: <CheckCircleTwoTone twoToneColor="#52c41a" />,
         });
+        location.reload();
       },
       onCancel() {
         console.log("Cancel");
