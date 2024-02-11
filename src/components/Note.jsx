@@ -72,16 +72,21 @@ const Note = () => {
 
   const listNote = noteLocal?.map((note) => (
     <div
-      className={`w-full flex items-center gap-1 hover:opacity-70 p-2 ${
+      className={`w-full flex items-center justify-between gap-1 hover:opacity-70 p-2 ${
         note.status === 0 ? "bg-red-200" : "bg-green-200"
       }`}
     >
-      <div key={note.id} className="flex-1 flex items-center justify-between">
-        <span
-          className={`${note.status === 1 ? "line-through" : "no-underline"}`}
+      <div
+        key={note.id}
+        className="flex-1 flex gap-6 items-center justify-between"
+      >
+        <p
+          className={`text-wrap  ${
+            note.status === 1 ? "line-through" : "no-underline"
+          }`}
         >
           {note.content}
-        </span>
+        </p>
         {note.status === 0 ? (
           <Button
             onClick={() => handleOk(note.id)}
@@ -107,7 +112,7 @@ const Note = () => {
           cancelText="No"
           okType="danger"
         >
-          <div className="p-2 border border-red-600 rounded-xl">
+          <div className="p-2 border cursor-pointer border-red-600 rounded-xl">
             <CloseCircleTwoTone twoToneColor="#ff0000" />
           </div>
         </Popconfirm>
