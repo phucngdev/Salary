@@ -1,9 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import { Tabs } from "antd";
-import FirTable from "./FirTable";
-import SeconTable from "./SeconTable";
-import ThirTable from "./ThirTable";
+import Table from "./Table";
 import Note from "./Note";
 
 const Header = () => {
@@ -11,17 +9,17 @@ const Header = () => {
     {
       key: "1",
       label: "Bảng 1",
-      children: <FirTable></FirTable>,
+      children: Table(1),
     },
     {
       key: "2",
       label: "Bảng 2",
-      children: <SeconTable></SeconTable>,
+      children: Table(2),
     },
     {
       key: "3",
       label: "Bảng 3",
-      children: <ThirTable></ThirTable>,
+      children: Table(3),
     },
     {
       key: "4",

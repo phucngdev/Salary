@@ -8,9 +8,9 @@ import { Button, Modal, Tooltip, message } from "antd";
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-const SeconTable = () => {
+const Table = (data) => {
   const [time, setTime] = useState(() => {
-    const timeLocal = JSON.parse(localStorage.getItem(`seconMonth`)) || [];
+    const timeLocal = JSON.parse(localStorage.getItem(`month${data}`)) || [];
     return timeLocal;
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,6 +20,7 @@ const SeconTable = () => {
     timeDay: "",
     timeStart: "",
     timeEnd: "",
+    timeOt: "",
   });
   const handleChange = (e) => {
     const { value, name } = e.target;
@@ -68,6 +69,18 @@ const SeconTable = () => {
   };
 
   const handleOk = () => {
+    if (!infoDate.timeOt) {
+      infoDate.timeOt = "0:00";
+    }
+    if (!infoDate.timeStart) {
+      infoDate.timeStart = "15:00";
+    }
+    if (!infoDate.timeEnd) {
+      infoDate.timeEnd = "23:00";
+    }
+    if (!infoDate.timeDay) {
+      infoDate.timeDay = new Date().toLocaleDateString();
+    }
     infoDate["timeSpace"] = handleTimeSpace(
       infoDate.timeStart,
       infoDate.timeEnd
@@ -79,16 +92,23 @@ const SeconTable = () => {
       timeDay: infoDate.timeDay,
       timeStart: infoDate.timeStart,
       timeEnd: infoDate.timeEnd,
+      timeOt: infoDate.timeOt,
       timeSpace: infoDate.timeSpace,
       timeWork: infoDate.timeWork,
       created: new Date().toLocaleString(),
     };
     time.unshift(newTime);
-    localStorage.setItem(`seconMonth`, JSON.stringify(time));
+    localStorage.setItem(`month${data}`, JSON.stringify(time));
     message.success({
       content: "Thêm mới thành công",
       icon: <CheckCircleTwoTone twoToneColor="#52c41a" />,
     });
+  };
+
+  const convertToTime = (totalSeconds) => {
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    return `${hours}:${minutes < 10 ? "0" : ""}${minutes}`;
   };
 
   const handleCancel = () => {
@@ -103,6 +123,16 @@ const SeconTable = () => {
     return timeWork + value.timeWork;
   }, 0);
 
+  const convertToSeconds = (time) => {
+    const [hour, minute] = time?.split(":");
+    const totalSeconds = parseInt(hour, 10) * 3600 + parseInt(minute, 10) * 60;
+    return totalSeconds;
+  };
+
+  const timeOt = time.reduce((timeWork, value) => {
+    return timeWork + convertToSeconds(value.timeOt);
+  }, 0);
+
   const { confirm } = Modal;
 
   const showDeleteConfirm = () => {
@@ -114,7 +144,7 @@ const SeconTable = () => {
       okType: "danger",
       cancelText: "No",
       onOk() {
-        localStorage.removeItem("seconMonth");
+        localStorage.removeItem(`month${data}`);
         message.success({
           content: "Xoá thành công",
           icon: <CheckCircleTwoTone twoToneColor="#52c41a" />,
@@ -137,7 +167,7 @@ const SeconTable = () => {
       onOk() {
         setTime((prevTime) => prevTime.filter((item) => item.id !== id));
         const itemDelete = time.filter((item) => item.id !== id);
-        localStorage.setItem(`seconMonth`, JSON.stringify(itemDelete));
+        localStorage.setItem(`month${data}`, JSON.stringify(itemDelete));
         message.success("Xoá thành công");
       },
       onCancel() {
@@ -165,7 +195,7 @@ const SeconTable = () => {
     const findToSaveIndex = time.findIndex((item) => item.id === itemEdit.id);
     if (findToSaveIndex !== -1) {
       time[findToSaveIndex] = itemEdit;
-      localStorage.setItem("seconMonth", JSON.stringify(time));
+      localStorage.setItem(`month${data}`, JSON.stringify(time));
       setMdalEdit(false);
       message.success({
         content: "Lưu thành công",
@@ -180,22 +210,25 @@ const SeconTable = () => {
       className="flex items-center justify-around hover:bg-slate-300 py-2"
     >
       <p className="w-[10%] text-center text-[10px] lg:text-sm">{index + 1}</p>
-      <p className="w-[15%] text-center text-[10px] lg:text-sm">
+      <p className="w-[13%] text-center text-[10px] lg:text-sm">
         {item.timeDay}
       </p>
-      <p className="w-[15%] text-center text-[10px] lg:text-sm">
+      <p className="w-[13%] text-center text-[10px] lg:text-sm">
         {item.timeStart}
       </p>
-      <p className="w-[15%] text-center text-[10px] lg:text-sm">
+      <p className="w-[13%] text-center text-[10px] lg:text-sm">
         {item.timeEnd}
       </p>
-      <p className="w-[15%] text-center text-[10px] lg:text-sm">
+      <p className="w-[13%] text-center text-[10px] lg:text-sm">
         {item.timeSpace}
       </p>
-      <p className="w-[15%] text-center text-[10px] lg:text-sm">
+      <p className="w-[13%] text-center text-[10px] lg:text-sm">
         {item.timeWork}
       </p>
-      <div className="w-[15%] text-center text-[10px] lg:text-sm flex items-center justify-center lg:gap-3">
+      <p className="w-[13%] text-center text-[10px] lg:text-sm">
+        {item.timeOt}
+      </p>
+      <div className="w-[13%] text-center text-[10px] lg:text-sm flex items-center justify-center lg:gap-3">
         <Tooltip title="Chỉnh sửa" color="blue">
           <button
             onClick={() => handleEdit(item.id)}
@@ -221,6 +254,9 @@ const SeconTable = () => {
       <div className="flex flex-col items-center px-3 pt-5 text-white bg-slate-600">
         <div className="w-full flex items-center justify-between mb-5">
           <h3 className="text-lg font-bold ">Tổng công: {timeWorking}</h3>
+          <h3 className="text-lg font-bold ">
+            Tăng ca: {convertToTime(timeOt)}
+          </h3>
           <Tooltip title="Thêm mới">
             <button
               onClick={showModal}
@@ -276,6 +312,19 @@ const SeconTable = () => {
                   />
                 </Tooltip>
               </div>
+              <div className="flex flex-col gap-2 mb-3">
+                <label htmlFor="">Tăng ca</label>
+                <Tooltip title="xx:xx">
+                  <input
+                    name="timeOt"
+                    value={infoDate.timeOt}
+                    onChange={handleChange}
+                    className="border px-2 py-1"
+                    type="text"
+                    placeholder="vd 4:00"
+                  />
+                </Tooltip>
+              </div>
             </div>
           </Modal>
         </div>
@@ -284,12 +333,13 @@ const SeconTable = () => {
         <div className="flex flex-col gap-2 bg-stone-200 p-1 lg:p-4 lg:max-h-[500px] overflow-scroll">
           <div className="flex items-center justify-around py-2">
             <p className="w-[10%] text-center">STT</p>
-            <p className="w-[15%] text-center">Day</p>
-            <p className="w-[15%] text-center">Start</p>
-            <p className="w-[15%] text-center">End</p>
-            <p className="w-[15%] text-center">Time</p>
-            <p className="w-[15%] text-center">Work</p>
-            <p className="w-[15%] text-center">Feature</p>
+            <p className="w-[13%] text-center">Day</p>
+            <p className="w-[13%] text-center">Start</p>
+            <p className="w-[13%] text-center">End</p>
+            <p className="w-[13%] text-center">Time</p>
+            <p className="w-[13%] text-center">Work</p>
+            <p className="w-[13%] text-center">OT</p>
+            <p className="w-[13%] text-center">Feature</p>
           </div>
           {handlePrint}
           <Modal
@@ -339,6 +389,19 @@ const SeconTable = () => {
                   />
                 </Tooltip>
               </div>
+              <div className="flex flex-col gap-2 mb-3">
+                <label htmlFor="">Tăng ca</label>
+                <Tooltip title="xx:xx">
+                  <input
+                    name="timeOt"
+                    value={itemEdit?.timeOt}
+                    onChange={handleChangeEdit}
+                    className="border px-2 py-1"
+                    type="text"
+                    placeholder="vd 4:00"
+                  />
+                </Tooltip>
+              </div>
             </div>
           </Modal>
         </div>
@@ -359,4 +422,4 @@ const SeconTable = () => {
   );
 };
 
-export default SeconTable;
+export default Table;
