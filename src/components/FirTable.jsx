@@ -342,11 +342,15 @@ const FirTable = () => {
             </div>
           </Modal>
         </div>
-        <div className="flex justify-center mt-5">
-          <Button onClick={showDeleteConfirm} type="dashed">
-            Delete
-          </Button>
-        </div>
+        {time.length > 0 ? (
+          <div className="flex justify-center mt-5">
+            <Button onClick={showDeleteConfirm} type="dashed">
+              Delete
+            </Button>
+          </div>
+        ) : (
+          <></>
+        )}
         <div className="flex justify-center mt-5">
           <h3>The copyright is owned by phucngdev</h3>
         </div>
