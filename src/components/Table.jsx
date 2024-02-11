@@ -31,7 +31,7 @@ const Table = (data) => {
   };
 
   const parseTime = (timeString) => {
-    const [hours, minutes] = timeString.split(":");
+    const [hours, minutes] = timeString?.split(":");
     return new Date(0, 0, 0, hours, minutes);
   };
 
@@ -119,7 +119,7 @@ const Table = (data) => {
     setMdalEdit(false);
   };
 
-  const timeWorking = time.reduce((timeWork, value) => {
+  const timeWorking = time?.reduce((timeWork, value) => {
     return timeWork + value.timeWork;
   }, 0);
 
@@ -129,7 +129,7 @@ const Table = (data) => {
     return totalSeconds;
   };
 
-  const timeOt = time.reduce((timeWork, value) => {
+  const timeOt = time?.reduce((timeWork, value) => {
     return timeWork + convertToSeconds(value.timeOt);
   }, 0);
 
