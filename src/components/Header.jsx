@@ -4,6 +4,7 @@ import { Tabs } from "antd";
 import FirTable from "./FirTable";
 import SeconTable from "./SeconTable";
 import ThirTable from "./ThirTable";
+import Note from "./Note";
 
 const Header = () => {
   const items = [
@@ -21,6 +22,11 @@ const Header = () => {
       key: "3",
       label: "Bảng 3",
       children: <ThirTable></ThirTable>,
+    },
+    {
+      key: "4",
+      label: "Ghi chú",
+      children: <Note></Note>,
     },
   ];
   return (
