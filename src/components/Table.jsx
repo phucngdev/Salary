@@ -158,9 +158,9 @@ const Table = (data) => {
   };
   const handleDelete = (id) => {
     confirm({
-      title: "Are you sure delete this task?",
+      title: "Bạn muốn xoá thông tin?",
       icon: <ExclamationCircleFilled />,
-      content: "Some descriptions",
+      content: "click Yes để xoá",
       okText: "Yes",
       okType: "danger",
       cancelText: "No",
