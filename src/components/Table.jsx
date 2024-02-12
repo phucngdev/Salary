@@ -246,7 +246,7 @@ const Table = (data) => {
       <p className="w-[13%] text-center text-[10px] lg:text-sm">
         {item.timeOt}
       </p>
-      <div className="w-[13%] text-center text-[10px] lg:text-sm flex items-center justify-center lg:gap-3">
+      <div className="w-[13%] text-center text-[10px] lg:text-sm flex items-center justify-center gap-1 lg:gap-3">
         <Tooltip title="Chỉnh sửa" color="blue">
           <button
             onClick={() => handleEdit(item.id)}
