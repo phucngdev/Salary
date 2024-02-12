@@ -45,6 +45,9 @@ const Table = (data) => {
     const differenceInSeconds = differenceInMilliseconds / 1000;
     const hours = Math.floor(differenceInSeconds / 3600);
     const minutes = Math.floor((differenceInSeconds % 3600) / 60);
+    if (hours > 8) {
+      return "8:00";
+    }
     return `${hours}:${minutes}`;
   };
 
@@ -57,7 +60,23 @@ const Table = (data) => {
     const differenceInMilliseconds = end - start;
     const differenceInSeconds = differenceInMilliseconds / 1000;
     const differenceInParseTime = differenceInSeconds / (8 * 60 * 60);
+    if (differenceInParseTime > 1) {
+      return 1;
+    }
     return differenceInParseTime;
+  };
+
+  const handleTimeOt = (startTime, endTime) => {
+    const start = parseTime(startTime);
+    const end = parseTime(endTime);
+    if (end < start) {
+      end.setDate(end.getDate() + 1);
+    }
+    const differenceInMilliseconds = end - start - 28800000;
+    const differenceInSeconds = differenceInMilliseconds / 1000;
+    const hours = Math.floor(differenceInSeconds / 3600);
+    const minutes = Math.floor((differenceInSeconds % 3600) / 60);
+    return `${hours}:${minutes}`;
   };
 
   const showModal = () => {
@@ -86,6 +105,7 @@ const Table = (data) => {
       infoDate.timeEnd
     );
     infoDate["timeWork"] = handleWorking(infoDate.timeStart, infoDate.timeEnd);
+    infoDate.timeOt = handleTimeOt(infoDate.timeStart, infoDate.timeEnd);
     setIsModalOpen(false);
     const newTime = {
       id: uuidv4(),
@@ -200,12 +220,15 @@ const Table = (data) => {
       ) {
         newUpdate.timeSpace = handleTimeSpace(newTimeStart, newTimeEnd);
         newUpdate.timeWork = handleWorking(newTimeStart, newTimeEnd);
+        newUpdate.timeOt = handleTimeOt(newTimeStart, newTimeEnd);
       } else if (name === "timeStart") {
         newUpdate.timeSpace = handleTimeSpace(value, itemEdit.timeEnd);
         newUpdate.timeWork = handleWorking(value, itemEdit.timeEnd);
+        newUpdate.timeOt = handleTimeOt(value, itemEdit.timeEnd);
       } else if (name === "timeEnd") {
         newUpdate.timeSpace = handleTimeSpace(itemEdit.timeStart, value);
         newUpdate.timeWork = handleWorking(itemEdit.timeStart, value);
+        newUpdate.timeOt = handleTimeOt(itemEdit.timeStart, value);
       }
     }
     setItemEdit(newUpdate);
@@ -334,7 +357,7 @@ const Table = (data) => {
                   />
                 </Tooltip>
               </div>
-              <div className="flex flex-col gap-2 mb-3">
+              {/* <div className="flex flex-col gap-2 mb-3">
                 <label htmlFor="">Tăng ca</label>
                 <Tooltip title="xx:xx">
                   <input
@@ -346,7 +369,7 @@ const Table = (data) => {
                     placeholder="vd 4:00"
                   />
                 </Tooltip>
-              </div>
+              </div> */}
             </div>
           </Modal>
         </div>
@@ -411,7 +434,7 @@ const Table = (data) => {
                   />
                 </Tooltip>
               </div>
-              <div className="flex flex-col gap-2 mb-3">
+              {/* <div className="flex flex-col gap-2 mb-3">
                 <label htmlFor="">Tăng ca</label>
                 <Tooltip title="xx:xx">
                   <input
@@ -423,7 +446,7 @@ const Table = (data) => {
                     placeholder="vd 4:00"
                   />
                 </Tooltip>
-              </div>
+              </div> */}
             </div>
           </Modal>
         </div>
