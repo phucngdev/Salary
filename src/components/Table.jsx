@@ -185,10 +185,28 @@ const Table = (data) => {
 
   const handleChangeEdit = (e) => {
     const { value, name } = e.target;
-    setItemEdit({
+    const newUpdate = {
       ...itemEdit,
       [name]: value,
-    });
+    };
+    if (name === "timeStart" || name === "timeEnd") {
+      const newTimeStart = name === "timeStart" ? value : itemEdit.timeStart;
+      const newTimeEnd = name === "timeEnd" ? value : itemEdit.timeEnd;
+      if (
+        (name === "timeStart" && newUpdate.hasOwnProperty("timeEnd")) ||
+        (name === "timeEnd" && newUpdate.hasOwnProperty("timeStart"))
+      ) {
+        newUpdate.timeSpace = handleTimeSpace(newTimeStart, newTimeEnd);
+        newUpdate.timeWork = handleWorking(newTimeStart, newTimeEnd);
+      } else if (name === "timeStart") {
+        newUpdate.timeSpace = handleTimeSpace(value, itemEdit.timeEnd);
+        newUpdate.timeWork = handleWorking(value, itemEdit.timeEnd);
+      } else if (name === "timeEnd") {
+        newUpdate.timeSpace = handleTimeSpace(itemEdit.timeStart, value);
+        newUpdate.timeWork = handleWorking(itemEdit.timeStart, value);
+      }
+    }
+    setItemEdit(newUpdate);
   };
 
   const handleSubmit = () => {
