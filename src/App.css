@@ -19,3 +19,15 @@ th {
   border-right: 1px solid #7f7f7f;
   border-bottom: 1px solid #7f7f7f;
 }
+input,
+button {
+  font-size: inherit;
+  font-family: inherit;
+  line-height: inherit;
+}
+@media (max-width: 768px) {
+  input[type="text"],
+  input[type="number"] {
+    font-size: 14px !important;
+  }
+}

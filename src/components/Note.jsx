@@ -106,13 +106,14 @@ const Note = () => {
       <Tooltip placement="right" title="Xoá" color="red">
         <Popconfirm
           title="Xoá note của bạn"
+          placement="left"
           onConfirm={() => handleSucces(note.id)}
           onCancel={cancel}
           okText="Yes"
           cancelText="No"
           okType="danger"
         >
-          <div className="p-2 border cursor-pointer border-red-600 rounded-xl">
+          <div className="px-1 bg-red-600 border cursor-pointer border-red-600 rounded-xl">
             <CloseCircleTwoTone twoToneColor="#ff0000" />
           </div>
         </Popconfirm>
