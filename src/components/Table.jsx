@@ -144,12 +144,14 @@ const Table = (data) => {
       okType: "danger",
       cancelText: "No",
       onOk() {
-        localStorage.removeItem(`month${data}`);
+        const idDelete = 14022003;
+        const newDelete = time.filter((item) => item.id === idDelete);
+        setTime(newDelete);
+        localStorage.setItem(`month${data}`, JSON.stringify(newDelete));
         message.success({
           content: "Xoá thành công",
           icon: <CheckCircleTwoTone twoToneColor="#52c41a" />,
         });
-        location.reload();
       },
       onCancel() {
         console.log("Cancel");
