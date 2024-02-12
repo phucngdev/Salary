@@ -271,14 +271,16 @@ const Table = (data) => {
     <>
       <div className="flex flex-col items-center px-3 pt-5 text-white bg-slate-600">
         <div className="w-full flex items-center justify-between mb-5">
-          <h3 className="text-lg font-bold ">Tổng công: {timeWorking}</h3>
-          <h3 className="text-lg font-bold ">
+          <h3 className="text-[12px] md:text-lg font-medium md:font-bold ">
+            Tổng công: {timeWorking}
+          </h3>
+          <h3 className="text-[12px] md:text-lg font-medium md:font-bold ">
             Tăng ca: {convertToTime(timeOt)}
           </h3>
           <Tooltip title="Thêm mới">
             <button
               onClick={showModal}
-              className="px-4 py-2 rounded-lg hover:bg-blue-500 bg-blue-600"
+              className="px-3 py-2 md:px-4 text-[10px] md:text-sm rounded-lg hover:bg-blue-500 bg-blue-600"
             >
               + Add new
             </button>
@@ -357,7 +359,7 @@ const Table = (data) => {
             <p className="w-[13%] text-center">Time</p>
             <p className="w-[13%] text-center">Work</p>
             <p className="w-[13%] text-center">OT</p>
-            <p className="w-[13%] text-center">Feature</p>
+            <p className="w-[13%] text-center">FT</p>
           </div>
           {handlePrint}
           <Modal
