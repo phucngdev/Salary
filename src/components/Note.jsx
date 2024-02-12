@@ -1,6 +1,9 @@
 import {
+  CarryOutTwoTone,
   CheckCircleTwoTone,
   CloseCircleTwoTone,
+  DeleteTwoTone,
+  DislikeTwoTone,
   ExclamationCircleFilled,
   ExclamationCircleTwoTone,
 } from "@ant-design/icons";
@@ -72,7 +75,7 @@ const Note = () => {
 
   const listNote = noteLocal?.map((note) => (
     <div
-      className={`w-full flex items-center justify-between gap-1 hover:opacity-70 p-2 ${
+      className={`w-full flex items-center justify-between gap-2 hover:opacity-70 p-2 ${
         note.status === 0 ? "bg-red-200" : "bg-green-200"
       }`}
     >
@@ -88,19 +91,21 @@ const Note = () => {
           {note.content}
         </p>
         {note.status === 0 ? (
-          <Button
-            onClick={() => handleOk(note.id)}
-            className="bg-green-600 text-white"
-          >
-            Xong
-          </Button>
+          <Tooltip placement="left" title="Xong" color="green">
+            <button onClick={() => handleOk(note.id)}>
+              <div className="px-1 border cursor-pointer border-[#00CC00] rounded-md">
+                <CarryOutTwoTone twoToneColor="#00CC00" />
+              </div>
+            </button>
+          </Tooltip>
         ) : (
-          <Button
-            onClick={() => handlePrev(note.id)}
-            className="bg-red-600 text-white"
-          >
-            Hoàn tác
-          </Button>
+          <Tooltip placement="left" title="Hoàn tác" color="red">
+            <button onClick={() => handlePrev(note.id)}>
+              <div className="px-1 border cursor-pointer border-[#ff0000] rounded-md">
+                <DislikeTwoTone twoToneColor="#ff0000" />
+              </div>
+            </button>
+          </Tooltip>
         )}
       </div>
       <Tooltip placement="right" title="Xoá" color="red">
@@ -113,8 +118,8 @@ const Note = () => {
           cancelText="No"
           okType="danger"
         >
-          <div className="px-1 bg-red-600 border cursor-pointer border-red-600 rounded-xl">
-            <CloseCircleTwoTone twoToneColor="#ff0000" />
+          <div className="px-1 border cursor-pointer border-red-600 rounded-md">
+            <DeleteTwoTone twoToneColor="#ff0000" />
           </div>
         </Popconfirm>
       </Tooltip>
