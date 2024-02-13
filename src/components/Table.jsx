@@ -323,7 +323,7 @@ const Table = (data) => {
           <Tooltip title="Thêm mới">
             <button
               onClick={showModal}
-              className="fixed bottom-10 right-[5%] w-[90%] h-[40px] flex justify-between items-center px-[5%] md:hidden p-2 md:px-4 text-base md:text-sm rounded-full hover:bg-blue-500 bg-blue-600"
+              className="fixed z-[99] bottom-10 right-[5%] w-[90%] h-[40px] flex justify-between items-center px-[5%] md:hidden p-2 md:px-4 text-base md:text-sm rounded-full hover:bg-blue-500 bg-blue-600"
             >
               <div>Thêm mới</div>
               <div>
@@ -395,7 +395,7 @@ const Table = (data) => {
           </Modal>
         </div>
       </div>
-      <div>
+      <div className="pb-[6.5rem]">
         <div className="flex flex-col gap-2 bg-stone-200 p-1 lg:p-4 lg:max-h-[500px] overflow-scroll">
           <div className="flex items-center justify-around py-2">
             <p className="w-[10%] text-center">STT</p>

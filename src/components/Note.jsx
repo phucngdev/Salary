@@ -157,7 +157,7 @@ const Note = () => {
 
   return (
     <>
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center pb-[6.5rem]">
         <form
           onSubmit={handleSubmit}
           className="w-full md:w-[50%] flex items-center justify-center gap-2"
@@ -182,7 +182,7 @@ const Note = () => {
         <Tooltip title="Thêm mới">
           <label
             htmlFor="inputNote"
-            className="fixed text-white bottom-10 right-[5%] w-[90%] h-[40px] flex justify-between items-center px-[5%] md:hidden p-2 md:px-4 text-base md:text-sm rounded-full hover:bg-blue-500 bg-blue-600"
+            className="fixed z-[99] text-white bottom-10 right-[5%] w-[90%] h-[40px] flex justify-between items-center px-[5%] md:hidden p-2 md:px-4 text-base md:text-sm rounded-full hover:bg-blue-500 bg-blue-600"
           >
             <div>Thêm ghi chú mới</div>
             <div>
