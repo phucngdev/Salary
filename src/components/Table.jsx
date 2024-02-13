@@ -75,6 +75,9 @@ const Table = (data) => {
     const differenceInMilliseconds = end - start - 28800000;
     const differenceInSeconds = differenceInMilliseconds / 1000;
     const hours = Math.floor(differenceInSeconds / 3600);
+    if (hours <= 0) {
+      return "0:0";
+    }
     const minutes = Math.floor((differenceInSeconds % 3600) / 60);
     return `${hours}:${minutes}`;
   };
@@ -119,6 +122,12 @@ const Table = (data) => {
     };
     time.unshift(newTime);
     localStorage.setItem(`month${data}`, JSON.stringify(time));
+    setInfoDate({
+      timeDay: "",
+      timeStart: "",
+      timeEnd: "",
+      timeOt: "",
+    });
     message.success({
       content: "Thêm mới thành công",
       icon: <CheckCircleTwoTone twoToneColor="#52c41a" />,
