@@ -6,6 +6,7 @@ import {
   DislikeTwoTone,
   ExclamationCircleFilled,
   ExclamationCircleTwoTone,
+  PlusCircleTwoTone,
 } from "@ant-design/icons";
 import { Button, Modal, Popconfirm, Tooltip, message } from "antd";
 import React, { useEffect, useRef, useState } from "react";
@@ -162,7 +163,7 @@ const Note = () => {
           className="w-full md:w-[50%] flex items-center justify-center gap-2"
         >
           <input
-            className="flex-1 border border-black px-2 py-1 rounded-lg"
+            className="flex-1 border border-black px-2 py-2 md:py-1 rounded-lg"
             type="text"
             placeholder="Ghi chú"
             ref={inputRef}
@@ -172,11 +173,22 @@ const Note = () => {
           <Button
             onClick={handleSubmit}
             type="default"
-            className="border-blue-600 bg-blue-500 text-white"
+            className="hidden md:block border-blue-600 bg-blue-500 text-white"
           >
             Thêm
           </Button>
         </form>
+        <Tooltip title="Thêm mới">
+          <button
+            onClick={handleSubmit}
+            className="fixed text-white bottom-10 right-[5%] w-[90%] h-[40px] flex justify-between items-center px-[5%] md:hidden p-2 md:px-4 text-base md:text-sm rounded-full hover:bg-blue-500 bg-blue-600"
+          >
+            <div>Thêm ghi chú mới</div>
+            <div>
+              <PlusCircleTwoTone />
+            </div>
+          </button>
+        </Tooltip>
         {noteLocal?.length > 0 ? (
           <>
             <div className="flex items-center mx-auto mt-3">
