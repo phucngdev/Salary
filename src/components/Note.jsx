@@ -7,7 +7,7 @@ import {
   ExclamationCircleFilled,
   ExclamationCircleTwoTone,
 } from "@ant-design/icons";
-import { Button, Popconfirm, Tooltip, message } from "antd";
+import { Button, Modal, Popconfirm, Tooltip, message } from "antd";
 import React, { useEffect, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
@@ -21,6 +21,8 @@ const Note = () => {
     return localStore;
   });
   const [note, setNote] = useState("");
+
+  const countSucces = noteLocal?.filter((item) => item.status === 1);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -44,6 +46,32 @@ const Note = () => {
       icon: <CheckCircleTwoTone twoToneColor="#52c41a" />,
     });
     setNote("");
+  };
+
+  const { confirm } = Modal;
+
+  const showDeleteConfirm = () => {
+    confirm({
+      title: "Xoá tất cả ghi chú?",
+      icon: <ExclamationCircleFilled />,
+      content: "click Yes để xoá",
+      okText: "Yes",
+      okType: "danger",
+      cancelText: "No",
+      onOk() {
+        const idDelete = 14022003;
+        const newDelete = noteLocal.filter((item) => item.id === idDelete);
+        setNoteLocal(newDelete);
+        localStorage.setItem("note", JSON.stringify(newDelete));
+        message.success({
+          content: "Xoá thành công",
+          icon: <CheckCircleTwoTone twoToneColor="#52c41a" />,
+        });
+      },
+      onCancel() {
+        console.log("Cancel");
+      },
+    });
   };
 
   const handleOk = (id) => {
@@ -73,7 +101,7 @@ const Note = () => {
     message.error("Click on No");
   };
 
-  const listNote = noteLocal?.map((note) => (
+  const listNote = noteLocal?.map((note, index) => (
     <div
       className={`w-full flex items-center justify-between gap-2 hover:opacity-70 p-2 ${
         note.status === 0 ? "bg-red-200" : "bg-green-200"
@@ -88,7 +116,7 @@ const Note = () => {
             note.status === 1 ? "line-through" : "no-underline"
           }`}
         >
-          {note.content}
+          {index + 1}: {note.content}
         </p>
         {note.status === 0 ? (
           <Tooltip placement="left" title="Xong" color="green">
@@ -149,9 +177,27 @@ const Note = () => {
             Thêm
           </Button>
         </form>
+        {noteLocal?.length > 0 ? (
+          <>
+            <div className="flex items-center mx-auto mt-3">
+              Hoàn thành {countSucces.length}/{noteLocal.length}
+            </div>
+          </>
+        ) : (
+          <></>
+        )}
         <div className="w-full md:w-[50%] mt-4 flex flex-col gap-1 items-center justify-center">
           {listNote}
         </div>
+        {noteLocal.length > 0 ? (
+          <div className="flex justify-center mt-5">
+            <Button onClick={showDeleteConfirm} type="dashed">
+              Delete
+            </Button>
+          </div>
+        ) : (
+          <></>
+        )}
         <div className="flex justify-center mt-5">
           <h3>The copyright is owned by phucngdev</h3>
         </div>
