@@ -325,9 +325,9 @@ const Table = (data) => {
               onClick={showModal}
               className="fixed bottom-10 right-[5%] w-[90%] h-[50px] flex justify-between items-center px-[5%] md:hidden p-2 md:px-4 text-lg md:text-sm rounded-full hover:bg-blue-500 bg-blue-600"
             >
-              <div>Add new</div>
+              <div>Thêm mới</div>
               <div>
-                <PlusCircleTwoTone twoToneColor="#ffffff" />
+                <PlusCircleTwoTone />
               </div>
             </button>
           </Tooltip>
