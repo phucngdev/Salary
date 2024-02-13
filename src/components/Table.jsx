@@ -3,6 +3,7 @@ import {
   DeleteTwoTone,
   EditTwoTone,
   ExclamationCircleFilled,
+  PlusCircleTwoTone,
 } from "@ant-design/icons";
 import { Button, Modal, Tooltip, message } from "antd";
 import React, { useState } from "react";
@@ -314,9 +315,20 @@ const Table = (data) => {
           <Tooltip title="Thêm mới">
             <button
               onClick={showModal}
-              className="px-3 py-2 md:px-4 text-[10px] md:text-sm rounded-lg hover:bg-blue-500 bg-blue-600"
+              className="hidden md:block px-3 py-2 md:px-4 text-[10px] md:text-sm rounded-lg hover:bg-blue-500 bg-blue-600"
             >
               + Add new
+            </button>
+          </Tooltip>
+          <Tooltip title="Thêm mới">
+            <button
+              onClick={showModal}
+              className="fixed bottom-10 right-[5%] w-[90%] h-[50px] flex justify-between items-center px-[5%] md:hidden p-2 md:px-4 text-lg md:text-sm rounded-full hover:bg-blue-500 bg-blue-600"
+            >
+              <div>Add new</div>
+              <div>
+                <PlusCircleTwoTone twoToneColor="#ffffff" />
+              </div>
             </button>
           </Tooltip>
           <Modal
