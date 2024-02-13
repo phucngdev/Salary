@@ -165,6 +165,7 @@ const Note = () => {
           <input
             className="flex-1 border border-black px-2 py-2 md:py-1 rounded-lg"
             type="text"
+            id="inputNote"
             placeholder="Ghi chú"
             ref={inputRef}
             value={note}
@@ -179,15 +180,15 @@ const Note = () => {
           </Button>
         </form>
         <Tooltip title="Thêm mới">
-          <button
-            onClick={handleSubmit}
+          <label
+            htmlFor="inputNote"
             className="fixed text-white bottom-10 right-[5%] w-[90%] h-[40px] flex justify-between items-center px-[5%] md:hidden p-2 md:px-4 text-base md:text-sm rounded-full hover:bg-blue-500 bg-blue-600"
           >
             <div>Thêm ghi chú mới</div>
             <div>
               <PlusCircleTwoTone />
             </div>
-          </button>
+          </label>
         </Tooltip>
         {noteLocal?.length > 0 ? (
           <>
