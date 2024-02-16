@@ -46,7 +46,7 @@ const Table = (data) => {
     const differenceInSeconds = differenceInMilliseconds / 1000;
     const hours = Math.floor(differenceInSeconds / 3600);
     const minutes = Math.floor((differenceInSeconds % 3600) / 60);
-    if (hours > 8) {
+    if (hours >= 8 && minutes > 0) {
       return "8:00";
     }
     return `${hours}:${minutes}`;
@@ -76,10 +76,10 @@ const Table = (data) => {
     const differenceInMilliseconds = end - start - 28800000;
     const differenceInSeconds = differenceInMilliseconds / 1000;
     const hours = Math.floor(differenceInSeconds / 3600);
-    if (hours <= 0) {
-      return "0:0";
-    }
     const minutes = Math.floor((differenceInSeconds % 3600) / 60);
+    if (hours <= 0) {
+      return `0:${minutes}`;
+    }
     return `${hours}:${minutes}`;
   };
 
@@ -305,6 +305,9 @@ const Table = (data) => {
   return (
     <>
       <div className="flex flex-col items-center px-3 pt-5 text-white bg-slate-600">
+        <h3 className="text-[12px] md:text-lg font-medium md:font-bold ">
+          Tháng: {data}
+        </h3>
         <div className="w-full flex items-center justify-between mb-5">
           <h3 className="text-[12px] md:text-lg font-medium md:font-bold ">
             Tổng công: {timeWorking}
