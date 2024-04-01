@@ -9,9 +9,9 @@ import { Button, Modal, Tooltip, message } from "antd";
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-const Table = (data) => {
+const Table = ({ data }) => {
   const [time, setTime] = useState(() => {
-    const timeLocal = JSON.parse(localStorage.getItem(`month${data}`)) || [];
+    const timeLocal = JSON.parse(localStorage.getItem(data)) || [];
     return timeLocal;
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -122,7 +122,7 @@ const Table = (data) => {
       created: new Date().toLocaleString(),
     };
     time.unshift(newTime);
-    localStorage.setItem(`month${data}`, JSON.stringify(time));
+    localStorage.setItem(data, JSON.stringify(time));
     setInfoDate({
       timeDay: "",
       timeStart: "",
@@ -177,7 +177,7 @@ const Table = (data) => {
         const idDelete = 14022003;
         const newDelete = time.filter((item) => item.id === idDelete);
         setTime(newDelete);
-        localStorage.setItem(`month${data}`, JSON.stringify(newDelete));
+        localStorage.setItem(data, JSON.stringify(newDelete));
         message.success({
           content: "Xoá thành công",
           icon: <CheckCircleTwoTone twoToneColor="#52c41a" />,
@@ -199,7 +199,7 @@ const Table = (data) => {
       onOk() {
         setTime((prevTime) => prevTime.filter((item) => item.id !== id));
         const itemDelete = time.filter((item) => item.id !== id);
-        localStorage.setItem(`month${data}`, JSON.stringify(itemDelete));
+        localStorage.setItem(data, JSON.stringify(itemDelete));
         message.success("Xoá thành công");
       },
       onCancel() {
@@ -248,7 +248,7 @@ const Table = (data) => {
     const findToSaveIndex = time.findIndex((item) => item.id === itemEdit.id);
     if (findToSaveIndex !== -1) {
       time[findToSaveIndex] = itemEdit;
-      localStorage.setItem(`month${data}`, JSON.stringify(time));
+      localStorage.setItem(data, JSON.stringify(time));
       setMdalEdit(false);
       message.success({
         content: "Lưu thành công",

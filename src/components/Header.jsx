@@ -9,67 +9,12 @@ const Header = () => {
     {
       key: 1,
       label: "Tháng 1",
-      children: Table(1),
+      children: <Table data={1} />,
     },
     {
       key: 2,
       label: "Tháng 2",
-      children: Table(2),
-    },
-    {
-      key: 3,
-      label: "Tháng 3",
-      children: Table(3),
-    },
-    {
-      key: 4,
-      label: "Tháng 4",
-      children: Table(4),
-    },
-    {
-      key: 5,
-      label: "Tháng 5",
-      children: Table(5),
-    },
-    {
-      key: 6,
-      label: "Tháng 6",
-      children: Table(6),
-    },
-    {
-      key: 7,
-      label: "Tháng 7",
-      children: Table(7),
-    },
-    {
-      key: 8,
-      label: "Tháng 8",
-      children: Table(8),
-    },
-    {
-      key: 9,
-      label: "Tháng 9",
-      children: Table(9),
-    },
-    {
-      key: 10,
-      label: "Tháng 10",
-      children: Table(10),
-    },
-    {
-      key: 11,
-      label: "Tháng 11",
-      children: Table(11),
-    },
-    {
-      key: 12,
-      label: "Tháng 12",
-      children: Table(12),
-    },
-    {
-      key: 13,
-      label: "Ghi chú",
-      children: <Note></Note>,
+      children: <Table data={2} />,
     },
   ];
 
